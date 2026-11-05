@@ -1,26 +1,71 @@
-
 import 'package:flutter/material.dart';
+
+import '../carrito/carrito_icono.dart';
 import '../data/productos_neolife.dart';
 import '../models/producto.dart';
 import 'detalle_producto_screen.dart';
 
 class CatalogoScreen extends StatefulWidget {
-  const CatalogoScreen({super.key});
+  final String? categoriaInicial;
+
+  const CatalogoScreen({super.key, this.categoriaInicial});
 
   @override
   State<CatalogoScreen> createState() => _CatalogoScreenState();
 }
 
 class _CatalogoScreenState extends State<CatalogoScreen> {
+  static const Color _verde = Color(0xFF377C38);
+  static const List<String> _categorias = [
+    'Digestión',
+    'Relajación',
+    'Defensas',
+    'Articulaciones',
+  ];
+
   String busqueda = '';
+  String? categoriaSeleccionada;
+
+  @override
+  void initState() {
+    super.initState();
+    categoriaSeleccionada = widget.categoriaInicial;
+  }
+
+  Widget _chipCategoria(String etiqueta, String? valor) {
+    final seleccionado = categoriaSeleccionada == valor;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: ChoiceChip(
+        label: Text(etiqueta),
+        selected: seleccionado,
+        selectedColor: _verde,
+        labelStyle: TextStyle(
+          color: seleccionado ? Colors.white : Colors.black87,
+          fontWeight: FontWeight.w600,
+        ),
+        showCheckmark: false,
+        onSelected: (_) {
+          setState(() {
+            categoriaSeleccionada = valor;
+          });
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Producto> productosFiltrados =
-        productosNeoLife.where((producto) {
-      return producto.nombre
-          .toLowerCase()
-          .contains(busqueda.toLowerCase());
+    final List<Producto> productosFiltrados = productosNeoLife.where((
+      producto,
+    ) {
+      final coincideTexto = producto.nombre.toLowerCase().contains(
+        busqueda.toLowerCase(),
+      );
+      final coincideCategoria =
+          categoriaSeleccionada == null ||
+          producto.categorias.contains(categoriaSeleccionada);
+      return coincideTexto && coincideCategoria;
     }).toList();
 
     return Scaffold(
@@ -31,13 +76,14 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF377C38),
+        backgroundColor: _verde,
         foregroundColor: Colors.white,
+        actions: [CarritoIcono()],
       ),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: TextField(
               onChanged: (texto) {
                 setState(() {
@@ -55,20 +101,36 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
               ),
             ),
           ),
+          SizedBox(
+            height: 48,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                _chipCategoria('Todas', null),
+                for (final categoria in _categorias)
+                  _chipCategoria(categoria, categoria),
+              ],
+            ),
+          ),
           Expanded(
             child: productosFiltrados.isEmpty
-                ? const Center(
-                    child: Text('No se encontraron productos'),
+                ? Center(
+                    child: Text(
+                      categoriaSeleccionada == null
+                          ? 'No se encontraron productos'
+                          : 'No hay productos en $categoriaSeleccionada',
+                    ),
                   )
                 : GridView.builder(
                     padding: const EdgeInsets.all(12),
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 0.68,
-                    ),
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 220,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.68,
+                        ),
                     itemCount: productosFiltrados.length,
                     itemBuilder: (context, index) {
                       final producto = productosFiltrados[index];
@@ -82,9 +144,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    DetalleProductoScreen(
-                                  producto: producto,
-                                ),
+                                    DetalleProductoScreen(producto: producto),
                               ),
                             );
                           },
@@ -96,8 +156,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                                   child: Image.asset(
                                     producto.imagen,
                                     fit: BoxFit.contain,
-                                    errorBuilder:
-                                        (context, error, stackTrace) {
+                                    errorBuilder: (context, error, stackTrace) {
                                       return const Icon(
                                         Icons.inventory_2_outlined,
                                         size: 65,

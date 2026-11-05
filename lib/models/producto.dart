@@ -1,4 +1,3 @@
-
 class Producto {
   final String nombre;
   final String descripcion;
@@ -6,6 +5,7 @@ class Producto {
   final String propiedades;
   final double precio;
   final String imagen;
+  final List<String> categorias;
 
   const Producto({
     required this.nombre,
@@ -14,5 +14,6 @@ class Producto {
     required this.propiedades,
     required this.precio,
     required this.imagen,
+    this.categorias = const [],
   });
 }
