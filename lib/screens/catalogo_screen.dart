@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
+
 import '../data/productos_neolife.dart';
 import '../models/producto.dart';
 import 'detalle_producto_screen.dart';
+import '../carrito/carrito_icono.dart';
 
 class CatalogoScreen extends StatefulWidget {
   const CatalogoScreen({super.key});
@@ -16,11 +17,10 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Producto> productosFiltrados =
-        productosNeoLife.where((producto) {
-      return producto.nombre
-          .toLowerCase()
-          .contains(busqueda.toLowerCase());
+    final List<Producto> productosFiltrados = productosNeoLife.where((
+      producto,
+    ) {
+      return producto.nombre.toLowerCase().contains(busqueda.toLowerCase());
     }).toList();
 
     return Scaffold(
@@ -33,6 +33,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
         centerTitle: true,
         backgroundColor: const Color(0xFF377C38),
         foregroundColor: Colors.white,
+        actions: [CarritoIcono()],
       ),
       body: Column(
         children: [
@@ -57,18 +58,16 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
           ),
           Expanded(
             child: productosFiltrados.isEmpty
-                ? const Center(
-                    child: Text('No se encontraron productos'),
-                  )
+                ? const Center(child: Text('No se encontraron productos'))
                 : GridView.builder(
                     padding: const EdgeInsets.all(12),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 0.68,
-                    ),
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.68,
+                        ),
                     itemCount: productosFiltrados.length,
                     itemBuilder: (context, index) {
                       final producto = productosFiltrados[index];
@@ -82,9 +81,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    DetalleProductoScreen(
-                                  producto: producto,
-                                ),
+                                    DetalleProductoScreen(producto: producto),
                               ),
                             );
                           },
@@ -96,8 +93,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
                                   child: Image.asset(
                                     producto.imagen,
                                     fit: BoxFit.contain,
-                                    errorBuilder:
-                                        (context, error, stackTrace) {
+                                    errorBuilder: (context, error, stackTrace) {
                                       return const Icon(
                                         Icons.inventory_2_outlined,
                                         size: 65,

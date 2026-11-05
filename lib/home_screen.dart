@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 import 'custom_button.dart';
+import 'carrito/carrito_icono.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -94,15 +95,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: IconButton(
-                        tooltip: 'Carrito',
-                        icon: const Icon(
-                          Icons.shopping_cart_outlined,
-                          color: AppColors.primario,
-                        ),
-                        onPressed: () =>
-                            _proximamente(context, 'Aquí irá el carrito'),
-                      ),
+                      child: CarritoIcono(color: AppColors.primario),
                     ),
                   ],
                 ),
