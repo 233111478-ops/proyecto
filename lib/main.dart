@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'carrito/carrito.dart';
+import 'data/producto_repository.dart';
+import 'data/producto_repository_local.dart';
 import 'theme.dart';
 import 'splash_screen.dart';
 import 'screens/catalogo_screen.dart';
 import 'screens/carrito_screen.dart';
-
-import 'data/producto_repository.dart';
-import 'data/producto_repository_local.dart';
+import 'screens/pedido_screen.dart';
 
 void main() {
   runApp(
@@ -38,6 +38,7 @@ class BiophysiqueApp extends StatelessWidget {
               ModalRoute.of(context)?.settings.arguments as String?,
         ),
         '/carrito': (context) => const CarritoScreen(),
+        '/pedido': (context) => const PedidoScreen(),
       },
     );
   }
