@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'carrito/carrito.dart';
 import 'theme.dart';
 import 'splash_screen.dart';
 import 'screens/catalogo_screen.dart';
 import 'screens/carrito_screen.dart';
 
+import 'data/producto_repository.dart';
+import 'data/producto_repository_local.dart';
+
 void main() {
-  runApp(const BiophysiqueApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<ProductoRepository>(create: (_) => ProductoRepositoryLocal()),
+        ChangeNotifierProvider(create: (_) => Carrito()),
+      ],
+      child: const BiophysiqueApp(),
+    ),
+  );
 }
 
 class BiophysiqueApp extends StatelessWidget {
