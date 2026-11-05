@@ -1,6 +1,6 @@
 {
-    "name": "biophysique",
-    "short_name": "biophysique",
+    "name": "neolife_catalogo",
+    "short_name": "neolife_catalogo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

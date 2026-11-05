@@ -109,10 +109,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
                 Text(
                   'Bienestar natural',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontSize: 26,
-                        color: AppColors.primario,
-                      ),
+                  style: Theme.of(context).textTheme.headlineSmall
+                      ?.copyWith(fontSize: 26, color: AppColors.primario),
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
@@ -221,8 +219,9 @@ class HomeScreen extends StatelessWidget {
                                   color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: AppColors.acento
-                                          .withValues(alpha: 0.35),
+                                      color: AppColors.acento.withValues(
+                                        alpha: 0.35,
+                                      ),
                                       blurRadius: 26,
                                       spreadRadius: 3,
                                     ),
@@ -259,7 +258,7 @@ class HomeScreen extends StatelessWidget {
                           texto: 'Explorar productos',
                           icono: Icons.storefront,
                           onPressed: () =>
-                              _proximamente(context, 'Aquí irá el catálogo'),
+                              Navigator.pushNamed(context, '/catalogo'),
                         ),
                       ],
                     ),
