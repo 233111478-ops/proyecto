@@ -12,12 +12,9 @@ class ItemCarrito {
   double get subtotal => producto.precio * cantidad;
 }
 
-/// Carrito en memoria (MVP local). Se comparte en toda la app
-/// mediante Carrito.instancia y avisa a la UI cuando cambia.
+/// Estado compartido del carrito (MVP local).
+/// Se entrega a toda la app con ChangeNotifierProvider en main.dart.
 class Carrito extends ChangeNotifier {
-  Carrito._();
-  static final Carrito instancia = Carrito._();
-
   final List<ItemCarrito> _items = [];
 
   List<ItemCarrito> get items => List.unmodifiable(_items);

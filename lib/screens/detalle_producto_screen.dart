@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../carrito/carrito.dart';
 import '../carrito/carrito_icono.dart';
@@ -10,7 +11,7 @@ class DetalleProductoScreen extends StatelessWidget {
   const DetalleProductoScreen({super.key, required this.producto});
 
   void _agregarAlCarrito(BuildContext context) {
-    Carrito.instancia.agregar(producto);
+    context.read<Carrito>().agregar(producto);
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'carrito.dart';
 
@@ -10,20 +11,15 @@ class CarritoIcono extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: Carrito.instancia,
-      builder: (context, _) {
-        final cantidad = Carrito.instancia.totalArticulos;
-        return IconButton(
-          tooltip: 'Carrito',
-          onPressed: () => Navigator.pushNamed(context, '/carrito'),
-          icon: Badge(
-            isLabelVisible: cantidad > 0,
-            label: Text('$cantidad'),
-            child: Icon(Icons.shopping_cart_outlined, color: color),
-          ),
-        );
-      },
+    final cantidad = context.watch<Carrito>().totalArticulos;
+    return IconButton(
+      tooltip: 'Carrito',
+      onPressed: () => Navigator.pushNamed(context, '/carrito'),
+      icon: Badge(
+        isLabelVisible: cantidad > 0,
+        label: Text('$cantidad'),
+        child: Icon(Icons.shopping_cart_outlined, color: color),
+      ),
     );
   }
 }

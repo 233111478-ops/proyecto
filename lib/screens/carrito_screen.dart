@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../carrito/carrito.dart';
 
@@ -8,7 +9,7 @@ class CarritoScreen extends StatelessWidget {
   static const Color _verde = Color(0xFF377C38);
 
   Future<void> _confirmarPedido(BuildContext context) async {
-    final carrito = Carrito.instancia;
+    final carrito = context.read<Carrito>();
     final confirmado = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -35,11 +36,13 @@ class CarritoScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('¡Pedido registrado! Gracias por tu compra.'),
+        duration: Duration(seconds: 2),
       ),
     );
   }
 
   Future<void> _vaciarCarrito(BuildContext context) async {
+    final carrito = context.read<Carrito>();
     final confirmado = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -57,7 +60,7 @@ class CarritoScreen extends StatelessWidget {
         ],
       ),
     );
-    if (confirmado == true) Carrito.instancia.vaciar();
+    if (confirmado == true) carrito.vaciar();
   }
 
   Widget _carritoVacio(BuildContext context) {
@@ -99,8 +102,8 @@ class CarritoScreen extends StatelessWidget {
     );
   }
 
-  Widget _tarjetaItem(ItemCarrito item) {
-    final carrito = Carrito.instancia;
+  Widget _tarjetaItem(BuildContext context, ItemCarrito item) {
+    final carrito = context.read<Carrito>();
     return Card(
       elevation: 2,
       child: Padding(
@@ -189,8 +192,7 @@ class CarritoScreen extends StatelessWidget {
     );
   }
 
-  Widget _resumen(BuildContext context) {
-    final carrito = Carrito.instancia;
+  Widget _resumen(BuildContext context, Carrito carrito) {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -252,42 +254,38 @@ class CarritoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final carrito = Carrito.instancia;
-    return ListenableBuilder(
-      listenable: carrito,
-      builder: (context, _) {
-        return Scaffold(
-          backgroundColor: const Color(0xFFF5F8F3),
-          appBar: AppBar(
-            title: const Text(
-              'Mi carrito',
-              style: TextStyle(fontWeight: FontWeight.bold),
+    final carrito = context.watch<Carrito>();
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F8F3),
+      appBar: AppBar(
+        title: const Text(
+          'Mi carrito',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: _verde,
+        foregroundColor: Colors.white,
+        actions: [
+          if (!carrito.estaVacio)
+            IconButton(
+              tooltip: 'Vaciar carrito',
+              icon: const Icon(Icons.delete_sweep_outlined),
+              onPressed: () => _vaciarCarrito(context),
             ),
-            centerTitle: true,
-            backgroundColor: _verde,
-            foregroundColor: Colors.white,
-            actions: [
-              if (!carrito.estaVacio)
-                IconButton(
-                  tooltip: 'Vaciar carrito',
-                  icon: const Icon(Icons.delete_sweep_outlined),
-                  onPressed: () => _vaciarCarrito(context),
-                ),
-            ],
-          ),
-          body: carrito.estaVacio
-              ? _carritoVacio(context)
-              : ListView.separated(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: carrito.items.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 12),
-                  itemBuilder: (context, index) =>
-                      _tarjetaItem(carrito.items[index]),
-                ),
-          bottomNavigationBar: carrito.estaVacio ? null : _resumen(context),
-        );
-      },
+        ],
+      ),
+      body: carrito.estaVacio
+          ? _carritoVacio(context)
+          : ListView.separated(
+              padding: const EdgeInsets.all(16),
+              itemCount: carrito.items.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) =>
+                  _tarjetaItem(context, carrito.items[index]),
+            ),
+      bottomNavigationBar: carrito.estaVacio
+          ? null
+          : _resumen(context, carrito),
     );
   }
 }
