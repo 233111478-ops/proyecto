@@ -20,7 +20,10 @@ class BiophysiqueApp extends StatelessWidget {
       theme: buildBiophysiqueTheme(),
       home: const SplashScreen(),
       routes: {
-        '/catalogo': (context) => const CatalogoScreen(),
+        '/catalogo': (context) => CatalogoScreen(
+          categoriaInicial:
+              ModalRoute.of(context)?.settings.arguments as String?,
+        ),
         '/carrito': (context) => const CarritoScreen(),
       },
     );

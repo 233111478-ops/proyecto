@@ -7,20 +7,15 @@ import 'carrito/carrito_icono.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // Cambiar por el nombre real del médico (confirmarlo con el cliente).
-  static const String _nombreDoctor = 'Dr. Nombre Apellido';
-
-  void _proximamente(BuildContext context, String mensaje) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(mensaje)));
-  }
+  static const String _nombreDoctor = 'Dr. Martín Luna Guitron';
 
   /// Tarjeta de categoría; ocupa una cuarta parte del ancho.
+  /// Al tocarla abre el catálogo filtrado por esa categoría.
   Widget _categoria(BuildContext context, IconData icono, String texto) {
     return Expanded(
       child: GestureDetector(
-        onTap: () => _proximamente(context, 'Aquí se filtrará por $texto'),
+        onTap: () =>
+            Navigator.pushNamed(context, '/catalogo', arguments: texto),
         child: Container(
           padding: const EdgeInsets.symmetric(
             vertical: AppSpacing.sm + 4,

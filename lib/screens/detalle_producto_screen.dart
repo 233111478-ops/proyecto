@@ -16,10 +16,7 @@ class DetalleProductoScreen extends StatelessWidget {
       ..showSnackBar(
         SnackBar(
           content: Text('${producto.nombre} se agregó al carrito'),
-          action: SnackBarAction(
-            label: 'Ver carrito',
-            onPressed: () => Navigator.pushNamed(context, '/carrito'),
-          ),
+          duration: const Duration(seconds: 2),
         ),
       );
   }
