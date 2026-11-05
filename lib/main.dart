@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'carrito/carrito.dart';
-import 'data/producto_repository.dart';
-import 'data/producto_repository_local.dart';
-import 'theme.dart';
-import 'splash_screen.dart';
-import 'screens/catalogo_screen.dart';
-import 'screens/carrito_screen.dart';
-import 'screens/pedido_screen.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/data/producto_repository.dart';
+import 'package:biophysique/data/producto_repository_local.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
+import 'package:biophysique/features/carrito/carrito_screen.dart';
+import 'package:biophysique/features/carrito/pedido_screen.dart';
+import 'package:biophysique/features/catalogo/catalogo_screen.dart';
+import 'package:biophysique/features/inicio/splash_screen.dart';
 
 void main() {
   runApp(

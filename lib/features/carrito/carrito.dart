@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/producto.dart';
+import 'package:biophysique/models/producto.dart';
 
 /// Un producto dentro del carrito con su cantidad.
 class ItemCarrito {

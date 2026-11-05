@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'theme.dart';
-import 'custom_button.dart';
-import 'carrito/carrito_icono.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/core/widgets/carrito_icono.dart';
+import 'package:biophysique/core/widgets/custom_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

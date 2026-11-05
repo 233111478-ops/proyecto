@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/core/widgets/custom_button.dart';
 
-import 'theme.dart';
-import 'custom_button.dart';
 import 'home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -85,18 +85,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Text(
             titulo,
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
+            style: Theme.of(context).textTheme.headlineSmall
                 ?.copyWith(color: AppColors.primario),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
             texto,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 16,
-                ),
+            style: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(fontSize: 16),
           ),
         ],
       ),
@@ -128,19 +125,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     _pagina(
                       imagen: 'img/onboarding_1.png',
                       titulo: 'Bienvenido a Biophysique',
-                      texto: 'Descubre productos naturistas recomendados por '
+                      texto:
+                          'Descubre productos naturistas recomendados por '
                           'tu médico homeópata, desde tu celular.',
                     ),
                     _pagina(
                       imagen: 'img/onboarding_2.png',
                       titulo: 'Conoce cada producto',
-                      texto: 'Consulta para qué sirve, sus propiedades y sus '
+                      texto:
+                          'Consulta para qué sirve, sus propiedades y sus '
                           'características antes de elegir.',
                     ),
                     _pagina(
                       imagen: 'img/onboarding_3.png',
                       titulo: 'Arma tu pedido',
-                      texto: 'Agrega al carrito lo que necesitas y revisa el '
+                      texto:
+                          'Agrega al carrito lo que necesitas y revisa el '
                           'resumen con el total de tu compra.',
                     ),
                   ],
