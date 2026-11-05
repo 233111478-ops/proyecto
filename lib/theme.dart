@@ -29,6 +29,12 @@ ThemeData buildBiophysiqueTheme() {
       backgroundColor: AppColors.primario,
       foregroundColor: Colors.white,
       elevation: 0,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
     ),
     textTheme: const TextTheme(
       headlineSmall: TextStyle(
@@ -45,6 +51,16 @@ ThemeData buildBiophysiqueTheme() {
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+    ),
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
   );
 }

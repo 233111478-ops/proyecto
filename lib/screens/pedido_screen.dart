@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../carrito/carrito.dart';
+import '../theme.dart';
 
 /// Pantalla con formulario para capturar los datos del pedido.
 class PedidoScreen extends StatefulWidget {
@@ -13,8 +14,6 @@ class PedidoScreen extends StatefulWidget {
 }
 
 class _PedidoScreenState extends State<PedidoScreen> {
-  static const Color _verde = Color(0xFF377C38);
-
   final _formKey = GlobalKey<FormState>();
   final _nombreCtrl = TextEditingController();
   final _telefonoCtrl = TextEditingController();
@@ -48,33 +47,14 @@ class _PedidoScreenState extends State<PedidoScreen> {
     Navigator.pop(context, true);
   }
 
-  InputDecoration _decoracion(String etiqueta, IconData icono) {
-    return InputDecoration(
-      labelText: etiqueta,
-      prefixIcon: Icon(icono),
-      filled: true,
-      fillColor: Colors.white,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final carrito = context.watch<Carrito>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F8F3),
-      appBar: AppBar(
-        title: const Text(
-          'Datos del pedido',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: _verde,
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppBar(title: const Text('Datos del pedido')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -83,33 +63,36 @@ class _PedidoScreenState extends State<PedidoScreen> {
             children: [
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSpacing.md),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${carrito.totalArticulos} artículos'),
+                      Text(
+                        '${carrito.totalArticulos} artículos',
+                        style: const TextStyle(color: AppColors.textoPrincipal),
+                      ),
                       Text(
                         'Total: \$${carrito.total.toStringAsFixed(2)} MXN',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: _verde,
+                          color: AppColors.primario,
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSpacing.lg),
               TextFormField(
                 controller: _nombreCtrl,
                 textCapitalization: TextCapitalization.words,
-                decoration: _decoracion(
-                  'Nombre completo',
-                  Icons.person_outline,
+                decoration: const InputDecoration(
+                  labelText: 'Nombre completo',
+                  prefixIcon: Icon(Icons.person_outline),
                 ),
                 validator: _validarNombre,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               TextFormField(
                 controller: _telefonoCtrl,
                 keyboardType: TextInputType.phone,
@@ -117,28 +100,23 @@ class _PedidoScreenState extends State<PedidoScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(10),
                 ],
-                decoration: _decoracion('Teléfono (10 dígitos)', Icons.phone),
+                decoration: const InputDecoration(
+                  labelText: 'Teléfono (10 dígitos)',
+                  prefixIcon: Icon(Icons.phone),
+                ),
                 validator: _validarTelefono,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               TextFormField(
                 controller: _notasCtrl,
                 maxLines: 3,
-                decoration: _decoracion(
-                  'Notas para el doctor (opcional)',
-                  Icons.notes,
+                decoration: const InputDecoration(
+                  labelText: 'Notas para el doctor (opcional)',
+                  prefixIcon: Icon(Icons.notes),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _verde,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
                 onPressed: _enviarPedido,
                 icon: const Icon(Icons.send),
                 label: const Text(

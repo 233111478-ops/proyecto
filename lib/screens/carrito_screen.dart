@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../carrito/carrito.dart';
+import '../theme.dart';
 
 class CarritoScreen extends StatelessWidget {
   const CarritoScreen({super.key});
-
-  static const Color _verde = Color(0xFF377C38);
 
   Future<void> _confirmarPedido(BuildContext context) async {
     final enviado = await Navigator.pushNamed(context, '/pedido');
@@ -44,31 +43,28 @@ class CarritoScreen extends StatelessWidget {
   Widget _carritoVacio(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(
               Icons.shopping_cart_outlined,
               size: 90,
-              color: Colors.grey,
+              color: AppColors.textoSecundario,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.md),
             const Text(
               'Tu carrito está vacío',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Agrega productos desde el catálogo.',
-              style: TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _verde,
-                foregroundColor: Colors.white,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textoPrincipal,
               ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            const Text('Agrega productos desde el catálogo.'),
+            const SizedBox(height: AppSpacing.lg),
+            ElevatedButton.icon(
               onPressed: () =>
                   Navigator.pushReplacementNamed(context, '/catalogo'),
               icon: const Icon(Icons.storefront),
@@ -83,7 +79,6 @@ class CarritoScreen extends StatelessWidget {
   Widget _tarjetaItem(BuildContext context, ItemCarrito item) {
     final carrito = context.read<Carrito>();
     return Card(
-      elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Row(
@@ -97,7 +92,7 @@ class CarritoScreen extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) => const Icon(
                   Icons.inventory_2_outlined,
                   size: 40,
-                  color: Colors.green,
+                  color: AppColors.primario,
                 ),
               ),
             ),
@@ -110,18 +105,24 @@ class CarritoScreen extends StatelessWidget {
                     item.producto.nombre,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textoPrincipal,
+                    ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: AppSpacing.xs),
                   Text(
                     '\$${item.producto.precio.toStringAsFixed(2)} MXN c/u',
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.textoSecundario,
+                    ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: AppSpacing.xs),
                   Text(
                     'Subtotal: \$${item.subtotal.toStringAsFixed(2)}',
                     style: const TextStyle(
-                      color: _verde,
+                      color: AppColors.primario,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -135,7 +136,7 @@ class CarritoScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       visualDensity: VisualDensity.compact,
-                      color: _verde,
+                      color: AppColors.primario,
                       icon: const Icon(Icons.remove_circle_outline),
                       onPressed: () => carrito.disminuir(item.producto),
                     ),
@@ -144,11 +145,12 @@ class CarritoScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.textoPrincipal,
                       ),
                     ),
                     IconButton(
                       visualDensity: VisualDensity.compact,
-                      color: _verde,
+                      color: AppColors.primario,
                       icon: const Icon(Icons.add_circle_outline),
                       onPressed: () => carrito.incrementar(item.producto),
                     ),
@@ -156,7 +158,7 @@ class CarritoScreen extends StatelessWidget {
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.red,
+                    foregroundColor: Theme.of(context).colorScheme.error,
                     visualDensity: VisualDensity.compact,
                   ),
                   onPressed: () => carrito.eliminar(item.producto),
@@ -173,7 +175,7 @@ class CarritoScreen extends StatelessWidget {
   Widget _resumen(BuildContext context, Carrito carrito) {
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -192,14 +194,17 @@ class CarritoScreen extends StatelessWidget {
               children: [
                 Text(
                   'Total (${carrito.totalArticulos} artículos)',
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.textoPrincipal,
+                  ),
                 ),
                 Text(
                   '\$${carrito.total.toStringAsFixed(2)} MXN',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: _verde,
+                    color: AppColors.primario,
                   ),
                 ),
               ],
@@ -208,14 +213,6 @@ class CarritoScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _verde,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
                 onPressed: () => _confirmarPedido(context),
                 icon: const Icon(Icons.check_circle_outline),
                 label: const Text(
@@ -234,15 +231,8 @@ class CarritoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final carrito = context.watch<Carrito>();
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F8F3),
       appBar: AppBar(
-        title: const Text(
-          'Mi carrito',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: _verde,
-        foregroundColor: Colors.white,
+        title: const Text('Mi carrito'),
         actions: [
           if (!carrito.estaVacio)
             IconButton(
@@ -255,7 +245,7 @@ class CarritoScreen extends StatelessWidget {
       body: carrito.estaVacio
           ? _carritoVacio(context)
           : ListView.separated(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.md),
               itemCount: carrito.items.length,
               separatorBuilder: (context, index) => const SizedBox(height: 12),
               itemBuilder: (context, index) =>
