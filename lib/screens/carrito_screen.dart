@@ -9,30 +9,8 @@ class CarritoScreen extends StatelessWidget {
   static const Color _verde = Color(0xFF377C38);
 
   Future<void> _confirmarPedido(BuildContext context) async {
-    final carrito = context.read<Carrito>();
-    final confirmado = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirmar pedido'),
-        content: Text(
-          'Artículos: ${carrito.totalArticulos}\n'
-          'Total: \$${carrito.total.toStringAsFixed(2)} MXN',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Confirmar'),
-          ),
-        ],
-      ),
-    );
-
-    if (confirmado != true || !context.mounted) return;
-    carrito.vaciar();
+    final enviado = await Navigator.pushNamed(context, '/pedido');
+    if (enviado != true || !context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('¡Pedido registrado! Gracias por tu compra.'),
