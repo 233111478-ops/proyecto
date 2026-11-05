@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'theme.dart';
+import 'package:biophysique/core/theme.dart';
+
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -113,10 +114,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             ),
                           ],
                         ),
-                        child: Image.asset(
-                          'img/logo.png',
-                          fit: BoxFit.contain,
-                        ),
+                        child: Image.asset('img/logo.png', fit: BoxFit.contain),
                       ),
                       const SizedBox(height: AppSpacing.xl),
                       const Text(

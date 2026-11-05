@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../carrito/carrito_icono.dart';
-import '../data/producto_repository.dart';
-import '../models/producto.dart';
-import '../theme.dart';
-import 'detalle_producto_screen.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/core/widgets/carrito_icono.dart';
+import 'package:biophysique/data/producto_repository.dart';
+import 'package:biophysique/features/catalogo/detalle_producto_screen.dart';
+import 'package:biophysique/models/producto.dart';
 
 class CatalogoScreen extends StatefulWidget {
   final String? categoriaInicial;

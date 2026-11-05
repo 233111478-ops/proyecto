@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../carrito/carrito.dart';
-import '../theme.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
 
 /// Pantalla con formulario para capturar los datos del pedido.
 class PedidoScreen extends StatefulWidget {

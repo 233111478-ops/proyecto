@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../carrito/carrito.dart';
-import '../theme.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
 
 class CarritoScreen extends StatelessWidget {
   const CarritoScreen({super.key});

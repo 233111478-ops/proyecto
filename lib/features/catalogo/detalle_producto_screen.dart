@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../carrito/carrito.dart';
-import '../carrito/carrito_icono.dart';
-import '../models/producto.dart';
-import '../theme.dart';
+import 'package:biophysique/core/theme.dart';
+import 'package:biophysique/core/widgets/carrito_icono.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
+import 'package:biophysique/models/producto.dart';
 
 class DetalleProductoScreen extends StatelessWidget {
   final Producto producto;

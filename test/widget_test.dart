@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:biophysique/carrito/carrito.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
 import 'package:biophysique/data/producto_repository.dart';
 import 'package:biophysique/data/producto_repository_local.dart';
 import 'package:biophysique/data/productos_neolife.dart';

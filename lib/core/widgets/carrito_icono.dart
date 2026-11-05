@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'carrito.dart';
+import 'package:biophysique/features/carrito/carrito.dart';
 
 /// Ícono del carrito con el número de artículos. Abre la pantalla del carrito.
 class CarritoIcono extends StatelessWidget {
