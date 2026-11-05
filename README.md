@@ -8,6 +8,14 @@ Biophysique es una aplicación móvil que se desarrollo en Flutter para los clie
 - **Ubicación:** Ixmiquilpan, Hidalgo, México.
 - **Necesidad:** Actualmente el inventario y el registro de ventas se llevan de forma manual, lo que dificulta su organización. Además, los clientes no cuentan con un medio para consultar la información de los productos por su cuenta. La app ofrece un catálogo con fichas informativas de cada producto y un carrito para organizar las compras, como primer paso hacia la digitalización del negocio.
 
+### Problema y necesidades detectadas segun las entrevistas
+- Biophysique lleva inventario, ventas y pedidos de forma manual, y un solo día sin actualizar atrasa todo el registro, lo que deja al negocio sin información de ventas a la mano para decidir.
+- Registrar ventas, en efectivo y por tarjeta	
+- Consultar ventas por día y por semana para decidir mejor	
+- Consultar la existencia de los productos	
+- Hacer pedidos de productos próximos a agotarse	
+- Evitar atrasos por actualizar a mano	
+
 ### Usuarios
 - **Clientes:** consultan para qué sirve cada producto, sus propiedades y precios, y organizan sus compras.
 - **Médico homeópata:** indica los productos que necesita cada paciente.
@@ -35,6 +43,12 @@ Universidad Politécnica Metropolitana de Hidalgo, Ingeniería en Tecnologías d
 Los productos se almacenan localmente con datos de prueba. En esta etapa **no** se incluyen pagos reales, administración de inventario ni registro de ventas.
 
 ## Capturas
+ - Boceto
+
+| ![Home](docs/boceto/boceto_home.png) | ![Catalogo](docs/boceto/boceto_catalogo.png) |
+
+- MVP
+
 | Bienvenida | Catálogo | Ficha del producto |
 |---|---|---|
 | ![Bienvenida](docs/capturas/bienvenida.png) | ![Catálogo](docs/capturas/catalogo.png) | ![Detalle](docs/capturas/detalle.png) |
@@ -95,7 +109,11 @@ lib/
 |---|---|---|
 | Documentación oficial de Flutter | Estructura general, widgets y navegación | https://docs.flutter.dev |
 | Paquete provider | Manejo del estado del carrito | https://pub.dev/packages/provider |
-| [Pendiente] | [Pendiente] | [Pendiente] |
+
+## Evidencias Entrevistas
+| Medico | Trabajadora |
+|---|---|
+| ![Medico](docs/evidencias/chat_medico.jpeg) | ![Trabajadora](docs/evidencias/chat_trabajadora.jpeg) |
 
 ## Uso de IA
 El detalle del uso de herramientas de inteligencia artificial durante el desarrollo (qué se pidió, para qué y cómo se verificó el resultado) se encuentra en [AI_LOG.md](AI_LOG.md).

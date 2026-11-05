@@ -23,5 +23,4 @@ flutter:
 
   assets:
     - img/
-    - assets/images/
-    - assets/images/productos/
+    - img/productos/

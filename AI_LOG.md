@@ -9,7 +9,7 @@ integrante puede explicar su parte.
 
 ## Integrantes
 - Raul Lora Lira 233111790-a11y 
-- Ana karen Vera Garcia anavera
+- Ana Karen Vera Garcia anavera
 - Pedro Omar Marcelino Martinez mtz747770-sys
 
 
@@ -25,13 +25,19 @@ integrante puede explicar su parte.
 - Código generado por IA: Ninguno.
 - Archivos afectados: Ninguno se crearon nuevos
 
-## Entrada 01
+## Entrada 02
 - Fecha: 0/11/2026
-- Integrante
-- Herramienta: 
-- Tipo de uso: 
-- Consulta: 
-- Respuesta de la IA: 
-- Qué hizo el equipo: 
-- Código generado por IA:
+- Integrante: Ana Karen Vera García
+- Herramienta: Gemini / Claude
+- Tipo de uso: Generación de imágenes y revisión de código para las pantallas de entrada
+- Consulta:
+  - Gemini: se pidio crear las imagenes del splash, logo y home. Ademas de las de boceto
+  - Claude: se pidió revisar mi logica de codigo, mejorar el diseño y como funcionaba el onboarding con 3 pantallas
+- Respuesta de la IA:
+  - Gemini: generacion de imagenes
+  - Claude: entregó partes donde el codigo estaba mal, una explicación e ideas nuevas
+- Qué hizo el equipo:
+  - Entendio las ideas proporcionadas por la IA
+- Código generado por IA: Parte de diseño del splash y logica de tres pantallas en el onboarding
 - Archivos afectados:
+  - carpeta img - (logo e ilustraciones generadas con Gemini)
