@@ -1,27 +1,24 @@
-
 import 'package:flutter/material.dart';
+
+import 'theme.dart';
+import 'splash_screen.dart';
 import 'screens/catalogo_screen.dart';
 
 void main() {
-  runApp(const NeoLifeApp());
+  runApp(const BiophysiqueApp());
 }
 
-class NeoLifeApp extends StatelessWidget {
-  const NeoLifeApp({super.key});
+class BiophysiqueApp extends StatelessWidget {
+  const BiophysiqueApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NeoLife',
+      title: 'Biophysique',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFF377C38),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF377C38),
-        ),
-        useMaterial3: true,
-      ),
-      home: const CatalogoScreen(),
+      theme: buildBiophysiqueTheme(),
+      home: const SplashScreen(),
+      routes: {'/catalogo': (context) => const CatalogoScreen()},
     );
   }
 }
